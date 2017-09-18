@@ -1,7 +1,7 @@
 {
   "appid": "c01ab9fb-f50b-4c98-8076-1f8baa0e80b1",
   "name": "Cymon",
-  "description": "Queries Cymon for IP, URL, domain, and blacklist information.",
+  "description": "Queries Cymon for IP, URL, domain, and blacklist information",
   "type": "reputation",
   "main_module": "cymon_connector.pyc",
     "app_version": "1.0.7",
@@ -10,15 +10,15 @@
   "product_name": "Cymon",
   "product_version_regex": ".*",
   "logo": "cymon.png",
-  "min_phantom_version": "2.0.264",
+  "min_phantom_version": "3.0.247",
   "publisher": "Phantom",
   "package_name": "phantom_cymon",
-  "license": "Copyright (c) Phantom Cyber Corporation 2016",
+  "license": "Copyright (c) Phantom Cyber Corporation 2016-2017",
   "configuration": {
     "api_key": {
       "description": "api key",
       "required": false,
-      "data_type": "string",
+      "data_type": "password",
       "order": 0
     }
   },
