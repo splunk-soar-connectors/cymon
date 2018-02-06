@@ -1,300 +1,309 @@
 {
-  "appid": "c01ab9fb-f50b-4c98-8076-1f8baa0e80b1",
-  "name": "Cymon",
-  "description": "Queries Cymon for IP, URL, domain, and blacklist information.",
-  "type": "reputation",
-  "main_module": "cymon_connector.pyc",
-    "app_version": "1.0.7",
-    "utctime_updated": "2017-04-29T02:30:36.000000Z",
-  "product_vendor": "eSentire",
-  "product_name": "Cymon",
-  "product_version_regex": ".*",
-  "logo": "cymon.png",
-  "min_phantom_version": "2.0.264",
-  "publisher": "Phantom",
-  "package_name": "phantom_cymon",
-  "license": "Copyright (c) Phantom Cyber Corporation 2016",
-  "configuration": {
-    "api_key": {
-      "description": "api key",
-      "required": false,
-      "data_type": "string",
-      "order": 0
-    }
-  },
-  "actions": [
-    {
-      "action": "ip reputation",
-      "description": "Gets information about an IP",
-      "verbose": "This action retrieves:<ul><li>related events</li><li>related domains</li><li>related URLs</li></ul>As a result, this action makes three separate REST calls.",
-      "type": "investigate",
-      "read_only": true,
-      "identifier": "ip_reputation",
-  "render": {
-    "width": 12,
-    "title": "Ip Reputation",
-    "type": "json",
-    "height": 5
-  },
-  "output": [
-    {
-      "data_path": "action_result.data.*.events.count",
-      "data_type": "numeric"
-    },
-    {
-      "data_path": "action_result.data.*.events.results.*.tag",
-      "data_type": "string"
-    },
-    {
-      "data_path": "action_result.data.*.events.results.*.title",
-      "data_type": "string"
-    },
-    {
-      "data_path": "action_result.data.*.events.results.*.created",
-      "data_type": "string"
-    },
-    {
-      "data_path": "action_result.data.*.events.results.*.updated",
-      "data_type": "string"
-    },
-    {
-      "data_path": "action_result.data.*.events.results.*.description",
-      "data_type": "string"
-    },
-    {
-      "data_path": "action_result.data.*.events.results.*.details_url",
-      "data_type": "string"
-    },
-    {
-      "data_path": "action_result.data.*.domains.count",
-      "data_type": "numeric"
-    },
-    {
-      "data_path": "action_result.data.*.domains.results.*.name",
-      "data_type": "string"
-    },
-    {
-      "data_path": "action_result.data.*.domains.results.*.created",
-      "data_type": "string"
-    },
-    {
-      "data_path": "action_result.data.*.domains.results.*.updated",
-      "data_type": "string"
-    },
-    {
-      "data_path": "action_result.data.*.urls.count",
-      "data_type": "numeric"
-    },
-    {
-      "data_path": "action_result.data.*.urls.results.*.created",
-      "data_type": "string"
-    },
-    {
-      "data_path": "action_result.data.*.urls.results.*.updated",
-      "data_type": "string"
-    },
-    {
-      "data_path": "action_result.data.*.urls.results.*.location",
-      "data_type": "string"
-    },
-    {
-      "data_path": "action_result.status",
-      "data_type": "string"
-    },
-    {
-      "data_path": "action_result.message",
-      "data_type": "string"
-    },
-    {
-      "data_path": "action_result.summary.total_count",
-      "data_type": "numeric"
-    },
-    {
-      "data_path": "action_result.parameter.ip",
-      "data_type": "string",
-      "contains": ["ip"]
-    }
-  ],
-      "versions": "EQ(*)",
-      "parameters": {
-        "ip": {
-          "description": "IP address to query",
-          "data_type": "string",
-          "contains": [
-            "ip"
-          ],
-          "required": true,
-          "primary": true
+    "appid": "c01ab9fb-f50b-4c98-8076-1f8baa0e80b1",
+    "name": "Cymon",
+    "description": "Queries Cymon for IP, URL, domain, and blacklist information.",
+    "type": "reputation",
+    "main_module": "cymon_connector.pyc",
+    "app_version": "1.0.12",
+    "utctime_updated": "2018-01-27T21:16:33.000000Z",
+    "product_vendor": "eSentire",
+    "product_name": "Cymon",
+    "product_version_regex": ".*",
+    "logo": "logo_cymon.svg",
+    "logo_dark": "logo_cymon_dark.svg",
+    "min_phantom_version": "2.0.264",
+    "publisher": "Phantom",
+    "package_name": "phantom_cymon",
+    "license": "Copyright (c) Phantom Cyber Corporation, 2016-2018",
+    "configuration": {
+        "api_key": {
+            "description": "api key",
+            "required": false,
+            "data_type": "string",
+            "order": 0
         }
-      }
     },
-    {
-      "action": "lookup domain",
-      "description": "Gets information about a domain",
-      "type": "investigate",
-      "read_only": true,
-      "identifier": "lookup_domain",
-      "render": {
-        "width": 12,
-        "title": "Lookup Domain",
-        "type": "json",
-        "height": 5
-      },
-      "output": [
+    "actions": [
         {
-          "data_path": "action_result.data.*.ips",
-          "data_type": "string",
-          "contains": [
-            "ip"
-          ]
+            "action": "ip reputation",
+            "description": "Gets information about an IP",
+            "verbose": "This action retrieves:<ul><li>related events</li><li>related domains</li><li>related URLs</li></ul>As a result, this action makes three separate REST calls.",
+            "type": "investigate",
+            "read_only": true,
+            "identifier": "ip_reputation",
+            "render": {
+                "width": 12,
+                "title": "Ip Reputation",
+                "type": "json",
+                "height": 5
+            },
+            "output": [
+                {
+                    "data_path": "action_result.data.*.events.count",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.data.*.events.results.*.tag",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.events.results.*.title",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.events.results.*.created",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.events.results.*.updated",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.events.results.*.description",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.events.results.*.details_url",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.domains.count",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.data.*.domains.results.*.name",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.domains.results.*.created",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.domains.results.*.updated",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.urls.count",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.data.*.urls.results.*.created",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.urls.results.*.updated",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.urls.results.*.location",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary.total_count",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.ip",
+                    "data_type": "string",
+                    "contains": [
+                        "ip"
+                    ]
+                }
+            ],
+            "versions": "EQ(*)",
+            "parameters": {
+                "ip": {
+                    "description": "IP address to query",
+                    "data_type": "string",
+                    "contains": [
+                        "ip"
+                    ],
+                    "required": true,
+                    "primary": true
+                }
+            }
         },
         {
-          "data_path": "action_result.data.*.name",
-          "data_type": "string",
-          "contains": [
-            "domain"
-          ]
+            "action": "lookup domain",
+            "description": "Gets information about a domain",
+            "type": "investigate",
+            "read_only": true,
+            "identifier": "lookup_domain",
+            "render": {
+                "width": 12,
+                "title": "Lookup Domain",
+                "type": "json",
+                "height": 5
+            },
+            "output": [
+                {
+                    "data_path": "action_result.data.*.ips",
+                    "data_type": "string",
+                    "contains": [
+                        "ip"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.name",
+                    "data_type": "string",
+                    "contains": [
+                        "domain"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.created",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.sources",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.updated",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary.domain_count",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.domain",
+                    "data_type": "string",
+                    "contains": [
+                        "domain"
+                    ]
+                }
+            ],
+            "versions": "EQ(*)",
+            "parameters": {
+                "domain": {
+                    "description": "Domain to query",
+                    "data_type": "string",
+                    "contains": [
+                        "domain"
+                    ],
+                    "required": true,
+                    "primary": true
+                }
+            }
         },
         {
-          "data_path": "action_result.data.*.created",
-          "data_type": "string"
+            "action": "test connectivity",
+            "description": "Tests connectivity to Cymon",
+            "type": "test",
+            "read_only": true,
+            "identifier": "test_connectivity",
+            "render": {},
+            "output": [],
+            "versions": "EQ(*)",
+            "parameters": {}
         },
         {
-          "data_path": "action_result.data.*.sources",
-          "data_type": "string"
-        },
-        {
-          "data_path": "action_result.data.*.updated",
-          "data_type": "string"
-        },
-        {
-          "data_path": "action_result.status",
-          "data_type": "string"
-        },
-        {
-          "data_path": "action_result.message",
-          "data_type": "string"
-        },
-        {
-          "data_path": "action_result.summary.domain_count",
-          "data_type": "numeric"
-        },
-        {
-          "data_path": "action_result.parameter.domain",
-          "data_type": "string",
-          "contains": [
-            "domain"
-          ]
+            "action": "file reputation",
+            "description": "Gets information about a hash",
+            "verbose": "",
+            "type": "investigate",
+            "read_only": true,
+            "identifier": "file_reputation",
+            "render": {
+                "width": 12,
+                "title": "File Reputation",
+                "type": "json",
+                "height": 5
+            },
+            "output": [
+                {
+                    "data_path": "action_result.data.*.count",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.data.*.results.*.tag",
+                    "data_type": "string",
+                    "column_order": 1,
+                    "column_name": "Tag"
+                },
+                {
+                    "data_path": "action_result.data.*.results.*.title",
+                    "data_type": "string",
+                    "column_order": 2,
+                    "column_name": "Details"
+                },
+                {
+                    "data_path": "action_result.data.*.results.*.created",
+                    "data_type": "string",
+                    "column_order": 0,
+                    "column_name": "Date Created"
+                },
+                {
+                    "data_path": "action_result.data.*.results.*.updated",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.results.*.description",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.results.*.details_url",
+                    "data_type": "string",
+                    "column_order": 3,
+                    "column_name": "Details Weblink"
+                },
+                {
+                    "data_path": "action_result.status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.message",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.summary.total_count",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.parameter.hash",
+                    "data_type": "string",
+                    "contains": [
+                        "hash",
+                        "md5",
+                        "sha1",
+                        "sha256",
+                        "sha512"
+                    ]
+                }
+            ],
+            "versions": "EQ(*)",
+            "parameters": {
+                "hash": {
+                    "description": "Hash (md5, sha1, sha256, sha512)",
+                    "data_type": "string",
+                    "contains": [
+                        "hash",
+                        "md5",
+                        "sha1",
+                        "sha256",
+                        "sha512"
+                    ],
+                    "required": true,
+                    "primary": true
+                }
+            }
         }
-      ],
-      "versions": "EQ(*)",
-      "parameters": {
-        "domain": {
-          "description": "Domain to query",
-          "data_type": "string",
-          "contains": [
-            "domain"
-          ],
-          "required": true,
-          "primary": true
-        }
-      }
-    },
-    {
-      "action": "test connectivity",
-      "description": "Tests connectivity to Cymon",
-      "type": "test",
-      "read_only": true,
-      "identifier": "test_connectivity",
-      "render": {},
-      "output": [],
-      "versions": "EQ(*)",
-      "parameters": {}
-    },
-    {
-      "action": "file reputation",
-      "description": "Gets information about a hash",
-      "verbose": "",
-      "type": "investigate",
-      "read_only": true,
-      "identifier": "file_reputation",
-      "render": {
-        "width": 12,
-        "title": "File Reputation",
-        "type": "json",
-        "height": 5
-      },
-      "output": [
-        {
-          "data_path": "action_result.data.*.count",
-          "data_type": "numeric"
-        },
-        {
-          "data_path": "action_result.data.*.results.*.tag",
-          "data_type": "string",
-          "column_order": 1,
-          "column_name": "Tag"
-        },
-        {
-          "data_path": "action_result.data.*.results.*.title",
-          "data_type": "string",
-          "column_order": 2,
-          "column_name": "Details"
-        },
-        {
-          "data_path": "action_result.data.*.results.*.created",
-          "data_type": "string",
-          "column_order": 0,
-          "column_name": "Date Created"
-        },
-        {
-          "data_path": "action_result.data.*.results.*.updated",
-          "data_type": "string"
-        },
-        {
-          "data_path": "action_result.data.*.results.*.description",
-          "data_type": "string"
-        },
-        {
-          "data_path": "action_result.data.*.results.*.details_url",
-          "data_type": "string",
-          "column_order": 3,
-          "column_name": "Details Weblink"
-        },
-        {
-          "data_path": "action_result.status",
-          "data_type": "string"
-        },
-        {
-          "data_path": "action_result.message",
-          "data_type": "string"
-        },
-        {
-          "data_path": "action_result.summary.total_count",
-          "data_type": "numeric"
-        },
-        {
-          "data_path": "action_result.parameter.hash",
-          "data_type": "string",
-          "contains": ["hash", "md5", "sha1", "sha256", "sha512"]
-        }
-      ],
-      "versions": "EQ(*)",
-      "parameters": {
-        "hash": {
-          "description": "Hash (md5, sha1, sha256, sha512)",
-          "data_type": "string",
-          "contains": [
-            "hash",
-            "md5",
-            "sha1",
-            "sha256",
-            "sha512"
-          ],
-          "required": true,
-          "primary": true
-        }
-      }
-    }
-  ]
+    ]
 }
