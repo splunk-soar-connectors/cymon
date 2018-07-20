@@ -14,7 +14,7 @@
     "min_phantom_version": "2.0.264",
     "publisher": "Phantom",
     "package_name": "phantom_cymon",
-    "license": "Copyright (c) Phantom Cyber Corporation, 2016-2018",
+    "license": "Copyright (c) 2016-2018 Splunk Inc.",
     "configuration": {
         "api_key": {
             "description": "api key",
@@ -39,23 +39,38 @@
             },
             "output": [
                 {
+                    "data_path": "action_result.status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.ip",
+                    "data_type": "string",
+                    "contains": [
+                        "ip"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.domains.count",
+                    "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.data.*.domains.results.*.created",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.domains.results.*.name",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.domains.results.*.updated",
+                    "data_type": "string"
+                },
+                {
                     "data_path": "action_result.data.*.events.count",
                     "data_type": "numeric"
                 },
                 {
-                    "data_path": "action_result.data.*.events.results.*.tag",
-                    "data_type": "string"
-                },
-                {
-                    "data_path": "action_result.data.*.events.results.*.title",
-                    "data_type": "string"
-                },
-                {
                     "data_path": "action_result.data.*.events.results.*.created",
-                    "data_type": "string"
-                },
-                {
-                    "data_path": "action_result.data.*.events.results.*.updated",
                     "data_type": "string"
                 },
                 {
@@ -67,19 +82,15 @@
                     "data_type": "string"
                 },
                 {
-                    "data_path": "action_result.data.*.domains.count",
-                    "data_type": "numeric"
-                },
-                {
-                    "data_path": "action_result.data.*.domains.results.*.name",
+                    "data_path": "action_result.data.*.events.results.*.tag",
                     "data_type": "string"
                 },
                 {
-                    "data_path": "action_result.data.*.domains.results.*.created",
+                    "data_path": "action_result.data.*.events.results.*.title",
                     "data_type": "string"
                 },
                 {
-                    "data_path": "action_result.data.*.domains.results.*.updated",
+                    "data_path": "action_result.data.*.events.results.*.updated",
                     "data_type": "string"
                 },
                 {
@@ -91,19 +102,11 @@
                     "data_type": "string"
                 },
                 {
-                    "data_path": "action_result.data.*.urls.results.*.updated",
-                    "data_type": "string"
-                },
-                {
                     "data_path": "action_result.data.*.urls.results.*.location",
                     "data_type": "string"
                 },
                 {
-                    "data_path": "action_result.status",
-                    "data_type": "string"
-                },
-                {
-                    "data_path": "action_result.message",
+                    "data_path": "action_result.data.*.urls.results.*.updated",
                     "data_type": "string"
                 },
                 {
@@ -111,11 +114,8 @@
                     "data_type": "numeric"
                 },
                 {
-                    "data_path": "action_result.parameter.ip",
-                    "data_type": "string",
-                    "contains": [
-                        "ip"
-                    ]
+                    "data_path": "action_result.message",
+                    "data_type": "string"
                 }
             ],
             "versions": "EQ(*)",
@@ -127,7 +127,8 @@
                         "ip"
                     ],
                     "required": true,
-                    "primary": true
+                    "primary": true,
+                    "order": 0
                 }
             }
         },
@@ -145,6 +146,21 @@
             },
             "output": [
                 {
+                    "data_path": "action_result.status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.domain",
+                    "data_type": "string",
+                    "contains": [
+                        "domain"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.created",
+                    "data_type": "string"
+                },
+                {
                     "data_path": "action_result.data.*.ips",
                     "data_type": "string",
                     "contains": [
@@ -159,10 +175,6 @@
                     ]
                 },
                 {
-                    "data_path": "action_result.data.*.created",
-                    "data_type": "string"
-                },
-                {
                     "data_path": "action_result.data.*.sources",
                     "data_type": "string"
                 },
@@ -171,23 +183,12 @@
                     "data_type": "string"
                 },
                 {
-                    "data_path": "action_result.status",
-                    "data_type": "string"
-                },
-                {
-                    "data_path": "action_result.message",
-                    "data_type": "string"
-                },
-                {
                     "data_path": "action_result.summary.domain_count",
                     "data_type": "numeric"
                 },
                 {
-                    "data_path": "action_result.parameter.domain",
-                    "data_type": "string",
-                    "contains": [
-                        "domain"
-                    ]
+                    "data_path": "action_result.message",
+                    "data_type": "string"
                 }
             ],
             "versions": "EQ(*)",
@@ -199,7 +200,8 @@
                         "domain"
                     ],
                     "required": true,
-                    "primary": true
+                    "primary": true,
+                    "order": 0
                 }
             }
         },
@@ -229,8 +231,39 @@
             },
             "output": [
                 {
+                    "data_path": "action_result.status",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.parameter.hash",
+                    "data_type": "string",
+                    "contains": [
+                        "hash",
+                        "md5",
+                        "sha1",
+                        "sha256",
+                        "sha512"
+                    ]
+                },
+                {
                     "data_path": "action_result.data.*.count",
                     "data_type": "numeric"
+                },
+                {
+                    "data_path": "action_result.data.*.results.*.created",
+                    "data_type": "string",
+                    "column_order": 0,
+                    "column_name": "Date Created"
+                },
+                {
+                    "data_path": "action_result.data.*.results.*.description",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.results.*.details_url",
+                    "data_type": "string",
+                    "column_order": 3,
+                    "column_name": "Details Weblink"
                 },
                 {
                     "data_path": "action_result.data.*.results.*.tag",
@@ -245,31 +278,7 @@
                     "column_name": "Details"
                 },
                 {
-                    "data_path": "action_result.data.*.results.*.created",
-                    "data_type": "string",
-                    "column_order": 0,
-                    "column_name": "Date Created"
-                },
-                {
                     "data_path": "action_result.data.*.results.*.updated",
-                    "data_type": "string"
-                },
-                {
-                    "data_path": "action_result.data.*.results.*.description",
-                    "data_type": "string"
-                },
-                {
-                    "data_path": "action_result.data.*.results.*.details_url",
-                    "data_type": "string",
-                    "column_order": 3,
-                    "column_name": "Details Weblink"
-                },
-                {
-                    "data_path": "action_result.status",
-                    "data_type": "string"
-                },
-                {
-                    "data_path": "action_result.message",
                     "data_type": "string"
                 },
                 {
@@ -277,15 +286,8 @@
                     "data_type": "numeric"
                 },
                 {
-                    "data_path": "action_result.parameter.hash",
-                    "data_type": "string",
-                    "contains": [
-                        "hash",
-                        "md5",
-                        "sha1",
-                        "sha256",
-                        "sha512"
-                    ]
+                    "data_path": "action_result.message",
+                    "data_type": "string"
                 }
             ],
             "versions": "EQ(*)",
@@ -301,7 +303,8 @@
                         "sha512"
                     ],
                     "required": true,
-                    "primary": true
+                    "primary": true,
+                    "order": 0
                 }
             }
         }
