@@ -11,7 +11,7 @@
     "product_version_regex": ".*",
     "logo": "logo_cymon.svg",
     "logo_dark": "logo_cymon_dark.svg",
-    "min_phantom_version": "2.0.264",
+    "min_phantom_version": "3.5.180",
     "publisher": "Phantom",
     "package_name": "phantom_cymon",
     "license": "Copyright (c) 2016-2018 Splunk Inc.",
@@ -26,7 +26,7 @@
     "actions": [
         {
             "action": "ip reputation",
-            "description": "Gets information about an IP",
+            "description": "Get information about an IP",
             "verbose": "This action retrieves:<ul><li>related events</li><li>related domains</li><li>related URLs</li></ul>As a result, this action makes three separate REST calls.",
             "type": "investigate",
             "read_only": true,
@@ -134,7 +134,7 @@
         },
         {
             "action": "lookup domain",
-            "description": "Gets information about a domain",
+            "description": "Get information about a domain",
             "type": "investigate",
             "read_only": true,
             "identifier": "lookup_domain",
@@ -207,7 +207,7 @@
         },
         {
             "action": "test connectivity",
-            "description": "Tests connectivity to Cymon",
+            "description": "Test connectivity to Cymon",
             "type": "test",
             "read_only": true,
             "identifier": "test_connectivity",
@@ -218,7 +218,7 @@
         },
         {
             "action": "file reputation",
-            "description": "Gets information about a hash",
+            "description": "Get information about a hash",
             "verbose": "",
             "type": "investigate",
             "read_only": true,
