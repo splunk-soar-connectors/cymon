@@ -1,20 +1,20 @@
 {
     "appid": "c01ab9fb-f50b-4c98-8076-1f8baa0e80b1",
     "name": "Cymon",
-    "description": "Queries Cymon for IP, URL, domain, and blacklist information.",
+    "description": "This app integrates with the Cymon to implement investigative and reputation actions",
     "type": "reputation",
     "main_module": "cymon_connector.pyc",
     "app_version": "1.0.15",
-    "utctime_updated": "2018-12-07T01:52:17.000000Z",
+    "utctime_updated": "2018-09-26T00:38:56.000000Z",
     "product_vendor": "eSentire",
     "product_name": "Cymon",
     "product_version_regex": ".*",
     "logo": "logo_cymon.svg",
     "logo_dark": "logo_cymon_dark.svg",
-    "min_phantom_version": "3.5.180",
-    "publisher": "Phantom",
+    "min_phantom_version": "4.0.1068",
+    "publisher": "Splunk",
     "package_name": "phantom_cymon",
-    "license": "Copyright (c) 2016-2018 Splunk Inc.",
+    "license": "Copyright (c) 2016-2019 Splunk Inc.",
     "configuration": {
         "api_key": {
             "description": "api key",
@@ -40,82 +40,185 @@
             "output": [
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "success"
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.ip",
                     "data_type": "string",
                     "contains": [
-                        "ip"
+                        "ip",
+                        "ipv6"
+                    ],
+                    "example_values": [
+                        "1.1.1.1"
                     ]
                 },
                 {
                     "data_path": "action_result.data.*.domains.count",
-                    "data_type": "numeric"
+                    "data_type": "numeric",
+                    "example_values": [
+                        357
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.domains.next",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.domains.previous",
+                    "data_type": "string"
                 },
                 {
                     "data_path": "action_result.data.*.domains.results.*.created",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "2018-08-24T12:35:14Z"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.domains.results.*.name",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "kk347.ncxkg.cc"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.domains.results.*.updated",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "2018-08-26T04:56:59Z"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.events.count",
-                    "data_type": "numeric"
+                    "data_type": "numeric",
+                    "example_values": [
+                        469
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.events.next",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.events.previous",
+                    "data_type": "string"
                 },
                 {
                     "data_path": "action_result.data.*.events.results.*.created",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "2018-11-22T19:04:18Z"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.events.results.*.description",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "Domain: www.nlus-romania.ro"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.events.results.*.details_url",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "http://urlquery.net/report/09aaf220-5281-4bbb-b49a-7b5ccb3d17cf"
+                    ],
+                    "contains": [
+                        "url"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.events.results.*.tag",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "phishing"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.events.results.*.title",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "Phishing reported by Google SafeBrowsing"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.events.results.*.updated",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "2018-11-22T19:04:18Z"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.urls.count",
-                    "data_type": "numeric"
+                    "data_type": "numeric",
+                    "example_values": [
+                        189
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.urls.next",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.urls.previous",
+                    "data_type": "string"
                 },
                 {
                     "data_path": "action_result.data.*.urls.results.*.created",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "2017-12-09T04:58:27Z"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.urls.results.*.location",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "http://save102-001-site1.mywindowshosting.com/w2.html"
+                    ],
+                    "contains": [
+                        "url",
+                        "file name"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.urls.results.*.updated",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "2017-12-09T04:58:49Z"
+                    ]
                 },
                 {
                     "data_path": "action_result.summary.total_count",
-                    "data_type": "numeric"
+                    "data_type": "numeric",
+                    "example_values": [
+                        1015
+                    ]
                 },
                 {
                     "data_path": "action_result.message",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "IP Reputation succeeded"
+                    ]
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric",
+                    "example_values": [
+                        1
+                    ]
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric",
+                    "example_values": [
+                        1
+                    ]
                 }
             ],
             "versions": "EQ(*)",
@@ -124,7 +227,8 @@
                     "description": "IP address to query",
                     "data_type": "string",
                     "contains": [
-                        "ip"
+                        "ip",
+                        "ipv6"
                     ],
                     "required": true,
                     "primary": true,
@@ -147,24 +251,36 @@
             "output": [
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "success"
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.domain",
                     "data_type": "string",
                     "contains": [
                         "domain"
+                    ],
+                    "example_values": [
+                        "www.splunk.com"
                     ]
                 },
                 {
                     "data_path": "action_result.data.*.created",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "2015-05-06T11:10:32Z"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.ips",
                     "data_type": "string",
                     "contains": [
                         "ip"
+                    ],
+                    "example_values": [
+                        "54.230.131.46"
                     ]
                 },
                 {
@@ -172,23 +288,62 @@
                     "data_type": "string",
                     "contains": [
                         "domain"
+                    ],
+                    "example_values": [
+                        "www.splunk.com"
                     ]
                 },
                 {
                     "data_path": "action_result.data.*.sources",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "urlquery.net"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.updated",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "2017-02-10T21:55:31Z"
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.urls",
+                    "data_type": "string",
+                    "example_values": [
+                        "https://cymon.io/api/nexus/v1/url/http%253A%252F%252Fwww.splunk.com%252Fen_us%252Fsolutions%252Fsolution-areas%252Fsecurity-and-fraud%252Fsplunk-app-for-enterprise+%2528...%2529"
+                    ],
+                    "contains": [
+                        "url"
+                    ]
                 },
                 {
                     "data_path": "action_result.summary.domain_count",
-                    "data_type": "numeric"
+                    "data_type": "numeric",
+                    "example_values": [
+                        2
+                    ]
                 },
                 {
                     "data_path": "action_result.message",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "Lookup Domain succeeded"
+                    ]
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric",
+                    "example_values": [
+                        1
+                    ]
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric",
+                    "example_values": [
+                        1
+                    ]
                 }
             ],
             "versions": "EQ(*)",
@@ -232,7 +387,10 @@
             "output": [
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "success"
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.hash",
@@ -243,11 +401,25 @@
                         "sha1",
                         "sha256",
                         "sha512"
+                    ],
+                    "example_values": [
+                        "8743b52063cd84097a65d1633f5c74f5"
                     ]
                 },
                 {
                     "data_path": "action_result.data.*.count",
-                    "data_type": "numeric"
+                    "data_type": "numeric",
+                    "example_values": [
+                        0
+                    ]
+                },
+                {
+                    "data_path": "action_result.data.*.next",
+                    "data_type": "string"
+                },
+                {
+                    "data_path": "action_result.data.*.previous",
+                    "data_type": "string"
                 },
                 {
                     "data_path": "action_result.data.*.results.*.created",
@@ -257,11 +429,20 @@
                 },
                 {
                     "data_path": "action_result.data.*.results.*.description",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "Test Description of File"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.results.*.details_url",
                     "data_type": "string",
+                    "contains": [
+                        "url"
+                    ],
+                    "example_values": [
+                        "http://urlquery.net/report/09aaf220-5200-4bbb-b49a-7b5ccb3d17cf"
+                    ],
                     "column_order": 3,
                     "column_name": "Details Weblink"
                 },
@@ -275,7 +456,10 @@
                     "data_path": "action_result.data.*.results.*.title",
                     "data_type": "string",
                     "column_order": 2,
-                    "column_name": "Details"
+                    "column_name": "Details",
+                    "example_values": [
+                        "Test Title"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.results.*.updated",
@@ -283,11 +467,31 @@
                 },
                 {
                     "data_path": "action_result.summary.total_count",
-                    "data_type": "numeric"
+                    "data_type": "numeric",
+                    "example_values": [
+                        0
+                    ]
                 },
                 {
                     "data_path": "action_result.message",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "File reputation succeeded"
+                    ]
+                },
+                {
+                    "data_path": "summary.total_objects",
+                    "data_type": "numeric",
+                    "example_values": [
+                        1
+                    ]
+                },
+                {
+                    "data_path": "summary.total_objects_successful",
+                    "data_type": "numeric",
+                    "example_values": [
+                        1
+                    ]
                 }
             ],
             "versions": "EQ(*)",

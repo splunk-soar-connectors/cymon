@@ -1,5 +1,5 @@
 # File: cymon_connector.py
-# Copyright (c) 2016-2018 Splunk Inc.
+# Copyright (c) 2016-2019 Splunk Inc.
 #
 # SPLUNK CONFIDENTIAL - Use or disclosure of this material in whole or in part
 # without a valid written license from Splunk Inc. is PROHIBITED.
@@ -15,6 +15,7 @@ from cymon_consts import *
 # Required library imports
 import json
 import requests
+import ipaddress
 
 
 class CymonConnector(BaseConnector):
@@ -44,6 +45,8 @@ class CymonConnector(BaseConnector):
             'Authorization': 'Token {0}'.format(self._api_key)
         }
 
+        self.set_validator('ipv6', self._is_ip)
+
         return phantom.APP_SUCCESS
 
     def _make_rest_call(self, endpoint):
@@ -64,12 +67,28 @@ class CymonConnector(BaseConnector):
         try:
             resp_json = r.json()
         except Exception as e:
-            return (phantom.APP_ERROR, "Could not convert response to JSON. {}", format(e))
+            return (phantom.APP_ERROR, "Could not convert response to JSON. {}".format(e))
 
         if (400 < r.status_code):
             return (phantom.APP_ERROR, "Response failed. {}".format(resp_json))
 
         return (phantom.APP_SUCCESS, resp_json)
+
+    def _is_ip(self, input_ip_address):
+        """ Function that checks given address and return True if address is valid IPv4 or IPV6 address.
+
+        :param input_ip_address: IP address
+        :return: status (success/failure)
+        """
+
+        ip_address_input = input_ip_address
+
+        try:
+            ipaddress.ip_address(unicode(ip_address_input))
+        except:
+            return False
+
+        return True
 
     def _ip_reputation(self, params):
         '''
@@ -148,7 +167,8 @@ class CymonConnector(BaseConnector):
             if 'ips' in response:
                 temp_ips = []
                 for link in response['ips']:
-                    temp_ips.append(link.replace("https://cymon.io/api/nexus/v1/ip/", ""))
+                    temp_ips.append(link.replace(
+                        "https://cymon.io/api/nexus/v1/ip/", ""))
                 response['ips'] = temp_ips
         else:
             action_result.set_summary({"domain_count": 0})
@@ -158,7 +178,8 @@ class CymonConnector(BaseConnector):
     def _test_connectivity(self):
 
         # Connectivity
-        self.save_progress(phantom.APP_PROG_CONNECTING_TO_ELLIPSES, "Querying Cymon API looking up 8.8.8.8")
+        self.save_progress(phantom.APP_PROG_CONNECTING_TO_ELLIPSES,
+                           "Querying Cymon API looking up 8.8.8.8")
 
         # set the endpoint
         endpoint = CYMON_API_URI_IP_LOOKUP.format(addr="8.8.8.8")
@@ -235,9 +256,10 @@ if __name__ == '__main__':
         password = getpass.getpass("Password: ")
 
     if (username and password):
+        login_url = BaseConnector._get_phantom_base_url() + "login"
         try:
             print ("Accessing the Login page")
-            r = requests.get("https://127.0.0.1/login", verify=False)
+            r = requests.get(login_url, verify=False)
             csrftoken = r.cookies['csrftoken']
 
             data = dict()
@@ -247,10 +269,11 @@ if __name__ == '__main__':
 
             headers = dict()
             headers['Cookie'] = 'csrftoken=' + csrftoken
-            headers['Referer'] = 'https://127.0.0.1/login'
+            headers['Referer'] = login_url
 
             print ("Logging into Platform to get the session id")
-            r2 = requests.post("https://127.0.0.1/login", verify=False, data=data, headers=headers)
+            r2 = requests.post(login_url,
+                               verify=False, data=data, headers=headers)
             session_id = r2.cookies['sessionid']
         except Exception as e:
             print ("Unable to get session id from the platfrom. Error: " + str(e))
