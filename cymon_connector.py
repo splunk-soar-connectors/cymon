@@ -15,17 +15,17 @@
 #
 #
 # Phantom imports
+import ipaddress
+# Required library imports
+import json
+
 import phantom.app as phantom
-from phantom.base_connector import BaseConnector
+import requests
 from phantom.action_result import ActionResult
+from phantom.base_connector import BaseConnector
 
 # THIS Connector imports
 from cymon_consts import *
-
-# Required library imports
-import json
-import requests
-import ipaddress
 
 
 class CymonConnector(BaseConnector):
@@ -242,8 +242,9 @@ class CymonConnector(BaseConnector):
 
 if __name__ == '__main__':
 
-    import pudb
     import argparse
+
+    import pudb
 
     pudb.set_trace()
 
