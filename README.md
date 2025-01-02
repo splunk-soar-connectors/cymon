@@ -10,8 +10,8 @@ Minimum Product Version: 4.0.1068
 
 This app integrates with the Cymon to implement investigative and reputation actions
 
-### Configuration Variables
-The below configuration variables are required for this Connector to operate.  These variables are specified when configuring a Cymon asset in SOAR.
+### Configuration variables
+This table lists the configuration variables required to operate Cymon. These variables are specified when configuring a Cymon asset in Splunk SOAR.
 
 VARIABLE | REQUIRED | TYPE | DESCRIPTION
 -------- | -------- | ---- | -----------
